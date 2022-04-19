@@ -7,5 +7,13 @@
 
 ## [算法包括常见面试题](算法)
 
+### 常用刷题网址
+
+https://codeforces.com/
+
+https://leetcode-cn.com/
+
+https://codetop.cc/home
+
 ## [面经包括本人面试经历](面经)
 
