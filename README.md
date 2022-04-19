@@ -11,6 +11,10 @@ c++那些事：https://www.bookstack.cn/read/CPlusPlusThings/8a050680c6429746.md
 
 ## [linux内核包含操作系统基础知识以及内核相关知识](linux内核)
 
+### 一些网址：
+
+linux内核揭秘：https://www.cntofu.com/book/104/index.html
+
 ## [算法包括常见面试题](算法)
 
 ### 常用刷题网址：
