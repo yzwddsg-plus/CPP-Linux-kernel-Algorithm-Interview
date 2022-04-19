@@ -1,13 +1,30 @@
 # CPP-Linux-kernel-Algorithm-Interview
-## c++后端技术/linux内核/算法题/面经------yzwddsg面向工作学习
 
-## [CPP技术包括CPP的常见面试题、基础知识以及STL知识](CPP技术/)
+## CPP、LInux内核、算法，面向工作学习--------------------------------yzwddsg
 
-## [linux内核包含操作系统基础知识以及内核相关知识](linux内核)
 
-## [算法包括常见面试题](算法)
 
-### 常用刷题网址
+**——————————————————————————————————————————————————**
+
+
+
+## [CPP技术——CPP的常见面试题、基础知识以及STL知识](CPP技术/)
+
+### 一些网址：
+
+设计模式：https://refactoringguru.cn/
+
+c++那些事：https://www.bookstack.cn/read/CPlusPlusThings/8a050680c6429746.md
+
+## [linux内核——操作系统基础知识以及内核相关知识](linux内核)
+
+### 一些网址：
+
+linux内核揭秘：https://www.cntofu.com/book/104/index.html
+
+## [算法——常见面试题](算法)
+
+### 常用刷题网址：
 
 https://codeforces.com/
 
@@ -15,8 +32,8 @@ https://leetcode-cn.com/
 
 https://codetop.cc/home
 
-## [面经包括本人面试经历](面经)
+## [面经——本人面试经历](面经)
 
-## [杂项包括其他方面的东西](杂项)
+## [杂项——其他方面的东西](杂项)
 
-## [一些书](一些书)
+## [一些书——一些不错的书pdf版](一些书)
