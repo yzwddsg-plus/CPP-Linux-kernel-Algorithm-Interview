@@ -3,11 +3,17 @@
 
 ## [CPP技术包括CPP的常见面试题、基础知识以及STL知识](CPP技术/)
 
+### 一些网址：
+
+设计模式：https://refactoringguru.cn/
+
+c++那些事：https://www.bookstack.cn/read/CPlusPlusThings/8a050680c6429746.md
+
 ## [linux内核包含操作系统基础知识以及内核相关知识](linux内核)
 
 ## [算法包括常见面试题](算法)
 
-### 常用刷题网址
+### 常用刷题网址：
 
 https://codeforces.com/
 
