@@ -36,3 +36,30 @@ public:
 
 ```
 
+## [无重复的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+```C++
+//滑动窗口
+//使用一个哈希表记录窗口中的char的个数
+//每次right移动后将right位置的char个数加一，然后滑动窗口，直到s[right]的个数小于等于1为止
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> mapping;
+        int result = 0;
+        int left = 0;//左窗口
+        int right = 0;//右窗口
+        int len = s.size();
+        for(;right < len; ++ right){
+            mapping[s[right]] ++;//将当前右指针指向的char的个数加一
+            while(mapping[s[right]] > 1){//当这个char的个数大于1，移动左窗口，直到不大于1
+                mapping[s[left]] --;
+                left ++;
+            }
+            result = max(result, right - left + 1);
+        }
+        return result;
+    }
+};
+```
+
