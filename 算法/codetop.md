@@ -45,7 +45,7 @@ public:
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> mapping;
+        unordered_map<char, int> mapping;//题解中大多使用的是unordered_set,使用它的insert和erase方法，但是我不习惯
         int result = 0;
         int left = 0;//左窗口
         int right = 0;//右窗口
