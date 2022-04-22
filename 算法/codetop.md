@@ -153,3 +153,79 @@ private:
 };
 ```
 
+## [数组中的第k大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+
+```C++
+//堆排
+class Solution {
+public:
+    //建立堆函数，把参数中表示下标的参数用一个新变量表示，用来表示当前节点和它的两个子节点中数值最大的节点的下标
+    //进行比较谁才是最大的值，，，，注意要保证left 和 right的值小于给定的最右侧边界
+    //比较完之后，如果当前节点不是最大值，就交换节点，然后对flag继续调用建堆函数
+    void Heapfy(vector<int>& nums, int cur, int len){
+        int left = cur * 2 + 1;
+        int right = cur * 2 + 2;
+        int flag = cur;
+        if(left < len && nums[left] > nums[flag]) flag = left;
+        if(right < len && nums[right] > nums[flag]) flag = right;
+        if(flag != cur){
+            swap(nums[cur], nums[flag]);
+            Heapfy(nums, flag, len);
+        }
+
+    }
+    //建立堆，，，就直接从二分之一下标处开始向0循环，每个循环体里面调用建堆函数即可
+    void build(vector<int>& nums, int len){
+        for(int mid = len / 2; mid >= 0; -- mid){
+            Heapfy(nums, mid, len);
+        }
+    }
+    int findKthLargest(vector<int>& nums, int k) {
+        int len = nums.size();
+        build(nums, len);
+        for(int i = 0; i < k - 1; ++ i){
+            swap(nums[0], nums[len - i - 1]);
+            Heapfy(nums, 0, len - i - 2);
+        }
+        return nums[0];
+    }
+};
+//快排
+//可以就先写个快排，然后直接在quicksort里面修改就好，类似二分的那种修改
+class Solution {
+public:
+    int quick(vector<int>& nums, int left, int right){
+        int flag = nums[right];
+        int p = left;
+        for(int i = left; i <= right; ++ i){
+            if(nums[i] > flag){
+                swap(nums[p ++], nums[i]);
+            }
+        }
+        swap(nums[right], nums[p]);
+        return p;
+    }
+    int quicksort(vector<int>& nums, int left, int right, int k){
+        if(left > right) return -1;//如果返回的是-1，可以看看这里
+        int mid = quick(nums, left, right);
+        if(mid == k - 1) return nums[mid];
+        else if(mid > k - 1){
+            return quicksort(nums, left, mid - 1, k);
+        }
+        else{
+            return quicksort(nums, mid + 1, right, k);
+        }
+        return -1;
+        //quicksort(nums, left, mid - 1);
+        //quicksort(nums, mid + 1, right);
+    }
+    int findKthLargest(vector<int>& nums, int k) {
+        int len = nums.size() - 1;
+        return quicksort(nums, 0, len, k);
+        //for(auto i : nums) cout << i << ' ';
+        //cout << endl;
+        //return 0;
+    }
+};
+```
+
