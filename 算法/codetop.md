@@ -229,3 +229,59 @@ public:
 };
 ```
 
+## [K个一组反转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/submissions/)
+
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    pair<ListNode*, ListNode*> rev(ListNode* head, ListNode* tail){
+        ListNode* cur = tail -> next;/////////！！！！！及其容易出错，，，一定要记录下来tail后面的节点，用于while判断
+        ListNode* prev = head;
+        ListNode* behi = nullptr;
+        ListNode* tem = nullptr;
+        while(prev != cur){//就是这里，既不能写成prev，也不能写成prev != tail，后者会造成死循环
+            tem = prev -> next;
+            prev -> next = behi;
+            behi = prev;
+            prev = tem;
+        }
+        return {head, tail};
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* dummy = new ListNode(0, head);//创建哨兵节点
+        ListNode* tail = dummy;
+        ListNode* prv = dummy;
+        ListNode* nxt = dummy;
+        //需要使用四个节点，prev指向需要反转的段的前一个，nxt指向后一个，，head是需要反转的起始节点，tail是需要反转的末尾节点
+        while(tail){
+            for(int i = 0; i < k; ++ i){
+                tail = tail -> next;
+                if(!tail){
+                    return dummy -> next;//判断到后面的话直接返回，当然视题目而定
+                }
+            }
+            nxt = tail -> next;//保证调用函数之前四个节点都指向正确的位置
+            pair<ListNode*, ListNode*> res = rev(head, tail);
+            //将反转后的链表段重新加入
+            prv -> next = res.second;
+            res.first -> next = nxt;
+            //重新设置节点
+            prv = res.first;
+            head = nxt;
+            tail = prv;
+        }
+        return dummy -> next;
+    }
+};
+```
+
