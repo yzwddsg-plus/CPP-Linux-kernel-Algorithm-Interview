@@ -285,4 +285,42 @@ public:
 };
 ```
 
-停一天，实验室没电
+## 三数之和
+
+```C++
+//排序 + 双指针  。。。。。。。。。没有用到哈希！！！
+//比较麻烦的就是下面（1）（2）（3）中要跳过重复元素
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> result;
+        int len = nums.size();
+        for(int i = 0; i < len; ++ i){
+            if(i != 0 && nums[i] == nums[i - 1]) continue ;//（1）
+            int left = i + 1;
+            int right = len - 1;
+            int cur = left;//这里要设置一个cur，不能直接在（2）中判断nums[left] == nums[left - 1]，因为其实第一个元素和第二个可以重复
+            while(left < right){
+                if(left != cur && nums[left] == nums[left - 1]) {//（2）
+                    left ++;
+                    continue ;
+                }
+                if(right != len - 1 && nums[right] == nums[right + 1]) {//（3）
+                    right --;
+                    continue ;
+                }
+                if(nums[left] + nums[right] + nums[i] == 0) {
+                    result.push_back({nums[i], nums[left], nums[right]});
+                    left ++;
+                    right --;
+                }
+                else if(nums[left] + nums[right] + nums[i] > 0) right --;
+                else left ++;
+            }
+        }
+        return result;
+    }
+};
+```
+
