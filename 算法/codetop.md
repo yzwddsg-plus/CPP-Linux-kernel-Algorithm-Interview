@@ -324,3 +324,79 @@ public:
 };
 ```
 
+## 手撕快排&手撕归并
+
+```C++
+//手撕快排
+class Solution {
+public:
+    int Quick(vector<int>& nums, int left, int right){
+        //下面两句是加入随机取值，因为力扣上有个测试用例使用常规快排会超市超时，是故意设计的升序数组，所以常规排序是最坏时间复杂度O(n2)
+        int tmp = left + rand() % (right - left + 1);
+        swap(nums[tmp], nums[right]);
+        
+        int cur = nums[right];
+        int p = left;
+        for(int i = left; i < right; ++ i){//这里一定是小于right，不能等于，否则出问题
+            if(nums[i] < cur){
+                swap(nums[i], nums[p ++]);
+            }
+        }
+        swap(nums[right], nums[p]);
+        return p;
+    }
+    void quicksort(vector<int>& nums, int left, int right){
+        if(left >= right) return ;
+        int mid = Quick(nums, left, right);
+        quicksort(nums, left, mid - 1);
+        quicksort(nums, mid + 1, right);
+    }
+    vector<int> sortArray(vector<int>& nums) {
+        int len = nums.size() - 1;
+        quicksort(nums, 0, len);
+        return nums;
+    }
+};
+//手撕归并
+class Solution {
+public:
+    void merge(vector<int>& nums, int left, int mid, int right){
+        vector<int> tmp;
+        int cur1 = left, cur2 = mid + 1;//cur2从mid + 1开始
+        while(cur1 <= mid && cur2 <= right){
+            if(nums[cur1] > nums[cur2]){
+                tmp.emplace_back(nums[cur2]);
+                ++ cur2;
+            }
+            else{
+                tmp.emplace_back(nums[cur1]);
+                ++ cur1;
+            }
+        }
+        while(cur1 <= mid){
+            tmp.emplace_back(nums[cur1]);
+            ++ cur1;
+        }
+        while(cur2 <= right){
+            tmp.emplace_back(nums[cur2]);
+            ++ cur2;
+        }
+        int len = tmp.size();
+        for(int i = 0; i < len; ++ i){//注意最后把数组赋值这块
+            nums[left + i] = tmp[i];
+        }
+    }
+    void mergesort(vector<int>& nums, int left, int right){
+        if(left >= right) return ;//大于等于
+        int mid = left + ((right - left) >> 1);
+        mergesort(nums, left, mid);
+        mergesort(nums, mid + 1, right);
+        merge(nums, left, mid, right);
+    }
+    vector<int> sortArray(vector<int>& nums) {
+        mergesort(nums, 0, nums.size() - 1);
+        return nums;
+    }
+};
+```
+
