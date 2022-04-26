@@ -285,7 +285,7 @@ public:
 };
 ```
 
-## 三数之和
+## [三数之和](https://leetcode-cn.com/problems/3sum/)
 
 ```C++
 //排序 + 双指针  。。。。。。。。。没有用到哈希！！！
@@ -324,7 +324,7 @@ public:
 };
 ```
 
-## 手撕快排&手撕归并
+## [手撕快排&手撕归并](https://leetcode-cn.com/problems/sort-an-array/)
 
 ```C++
 //手撕快排
