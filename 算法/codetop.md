@@ -400,3 +400,19 @@ public:
 };
 ```
 
+##  [最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
+
+```C++
+//dp动态规划 递推公式 dp[i] = max(nums[i], dp[i - 1] + nums[i]);,,,,,就是看一线dp[i - 1] + nums[i]之后和nums[i]本身比较谁更大
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int len = nums.size();
+        vector<int> dp(len, 0);
+        dp[0] = nums[0];
+        for(int i = 1; i < len; ++ i) dp[i] = max(nums[i], dp[i - 1] + nums[i]);
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
