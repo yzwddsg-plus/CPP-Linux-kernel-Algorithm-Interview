@@ -416,3 +416,44 @@ public:
 };
 ```
 
+## [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+```C++
+//直接使用归并排序中的方法进行合并即可，，，更进阶的是合并k个有序链表，就使用类似于归并排序的方法
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* dummy = new ListNode();
+        ListNode* cur = dummy;
+        while(list1 && list2){
+            if(list1 -> val > list2 -> val){
+                cur -> next = list2;
+                list2 = list2 -> next;
+            }
+            else{
+                cur -> next = list1;
+                list1 = list1 -> next;
+            }
+            cur = cur -> next;
+        }
+        /*
+        //下面这个没必要，因为是链表排序，所以直接把剩下的挂载到cur的结尾就好
+        //可是不知道怎么回事，下面的代码比后面的执行用时要少，按理来说应该要多才对啊
+        while(list2){
+            cur -> next = list2;
+            list2 = list2 -> next;
+            cur = cur -> next;
+        }
+        while(list1){
+            cur -> next = list1;
+            list1 = list1 -> next;
+            cur = cur -> next;
+        }
+        */
+        if(list1) cur -> next =  list1;
+        if(list2) cur -> next =  list2;
+        return dummy -> next;
+    }
+};
+```
+
