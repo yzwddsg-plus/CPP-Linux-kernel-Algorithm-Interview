@@ -457,3 +457,23 @@ public:
 };
 ```
 
+## [两数之和](https://leetcode-cn.com/problems/two-sum/)
+
+```C++
+//哈希，减小空间复杂度，成为O(n)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mapping;
+        int len = nums.size();
+        for(int i = 0; i < len; ++ i){
+            if(mapping.find(target - nums[i]) != mapping.end()){
+                return {i, mapping[target - nums[i]]};
+            }
+            mapping[nums[i]] = i;
+        }
+        return {};
+    }
+};
+```
+
