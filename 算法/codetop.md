@@ -477,3 +477,32 @@ public:
 };
 ```
 
+## [二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+```C++
+//使用队列存储节点
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        queue<TreeNode*> que;
+        TreeNode* tmp;
+        if(!root) return res;
+        que.push(root);
+        //res.push_back({root -> val});
+        while(!que.empty()){
+            vector<int> vec;
+            for(int i = que.size(); i > 0; -- i){//遍历当前队列中的所有节点，即为遍历同层的节点
+                tmp = que.front();
+                que.pop();
+                vec.push_back(tmp -> val);
+                if(tmp -> left) que.push(tmp -> left);
+                if(tmp -> right) que.push(tmp -> right);
+            }
+            res.push_back(vec);
+        }
+        return res;
+    }
+};
+```
+
