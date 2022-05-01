@@ -506,3 +506,24 @@ public:
 };
 ```
 
+## [环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+```C++
+//快慢指针
+//fast和slow最开始都设置为头结点的位置，fast每次移动两步，slow每次移动一步，相遇即为有环，不相遇且fast到了尾巴即为无环
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(fast && fast -> next){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+            if(slow == fast) return true;
+        }
+        return false;
+    }
+};
+//还有一种，可以用哈希表存储下节点来，然后每遍历一个节点就在哈希表中查找有没有这个节点，有则有环，无则无环
+```
+
