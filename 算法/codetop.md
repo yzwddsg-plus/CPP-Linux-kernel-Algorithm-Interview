@@ -527,3 +527,37 @@ public:
 //还有一种，可以用哈希表存储下节点来，然后每遍历一个节点就在哈希表中查找有没有这个节点，有则有环，无则无环
 ```
 
+## [二叉树的锯齿形遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
+
+```c++
+//和层序遍历差不多，但是用一个双向链表记录一下从左到右还是从右到左，然后还需要对当前遍历方向进行判断
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if(!root) return result;
+        queue<TreeNode*> que;
+        TreeNode* tmp = nullptr;
+        que.push(root);
+        int layer = 1;
+        while(!que.empty()){
+            deque<int> deq;
+           for(int i = que.size(); i > 0; -- i){
+               tmp = que.front();que.pop();
+               if(layer % 2 != 0){
+                   deq.push_back(tmp -> val);
+               }
+               else{
+                   deq.push_front(tmp -> val);
+               }
+               if(tmp -> left) que.push(tmp -> left);
+               if(tmp -> right) que.push(tmp -> right);
+           } 
+           layer ++;///////注意这些别写在for循环里面去咯
+           result.emplace_back(vector<int> {deq.begin(), deq.end()});
+        }
+        return result;
+    }
+};
+```
+
