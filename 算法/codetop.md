@@ -561,3 +561,34 @@ public:
 };
 ```
 
+## [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+
+```C++
+//使用栈。。。
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> sta;
+        for(auto& i : s){
+            if(i == '(' || i == '[' || i == '{'){
+                sta.push(i);
+            }
+            else if(i == ')'){
+                if(sta.empty() || sta.top() != '(') return false;
+                sta.pop();
+            }
+            else if(i == ']'){
+                if(sta.empty() || sta.top() != '[') return false;
+                sta.pop();
+            }
+            else{
+                if(sta.empty() || sta.top() != '{') return false;
+                sta.pop();
+            }
+        }
+        if(!sta.empty()) return false;//最后在判断一下栈是否空
+        return true;
+    }
+};
+```
+
