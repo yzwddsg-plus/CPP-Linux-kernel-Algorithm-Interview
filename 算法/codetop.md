@@ -592,3 +592,29 @@ public:
 };
 ```
 
+## [搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+```C++
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size() - 1;
+        int mid = 0;
+        while(left <= right){
+            mid = left + ((right - left) >> 1);
+            if(nums[mid] == target) return  mid;
+            else if(nums[mid] >= nums[0]){//注意这里是大于等于还是大于，就注意一下等于的情况
+                if(target >= nums[0] && target <= nums[mid]) right = mid - 1;
+                else left = mid + 1;
+            }
+            else{
+                if(target <= nums[right] && target >= nums[mid]) left = mid + 1;
+                else right = mid - 1;
+            }
+        }
+        return -1;
+    }
+};
+```
+
