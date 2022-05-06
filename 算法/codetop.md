@@ -618,3 +618,22 @@ public:
 };
 ```
 
+## [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```C++
+//递归，当left right均空，说明p q不再树中，，，left空，说明p q在right中，，，right空，说明p q在left中，，，，left right都不空，说明p q分处root两侧
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr || root == p || root == q) return root;
+        TreeNode* left = lowestCommonAncestor(root -> left, p, q);
+        TreeNode* right = lowestCommonAncestor(root -> right, p, q);
+        if(left == nullptr && right == nullptr) return nullptr;
+        if(left == nullptr) return right;
+        if(right == nullptr) return  left;
+        return root;
+
+    }
+};
+```
+
