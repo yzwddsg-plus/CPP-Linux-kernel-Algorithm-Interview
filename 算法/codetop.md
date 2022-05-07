@@ -637,3 +637,39 @@ public:
 };
 ```
 
+## [相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+```C++
+//两条链表分别遍历，当某一个节点为空时，将它指向另一条链表。如果两个都为空，说明不相交，，，如果两个节点指向的节点相同，说明相交
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* up = headA, * down = headB;
+        while(up != down){
+            if(!up && !down) return nullptr;
+            if(!up) up = headB;
+            else up = up -> next;
+            if(!down) down = headA;
+            else down = down -> next;
+        }
+        return up;
+    }
+};
+//另一种写法
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* cur1 = headA;
+        ListNode* cur2 = headB;
+        if(!headA || !headB) return nullptr;
+        while(cur1 || cur2){
+            if(cur2 == cur1) return cur1;
+            cur1 = cur1 == nullptr ? headB : cur1 -> next;
+            cur2 = cur2 == nullptr ? headA : cur2 -> next;
+        }
+        return nullptr;
+    }
+};
+//另外也可以使用哈希表，存储一条链表的节点，另一个取节点进行匹配
+```
+
