@@ -506,6 +506,26 @@ public:
 };
 ```
 
+## [买卖股票最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
+
+```C++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int len = prices.size();
+        vector<int> dp(len, 0);
+        int mi = prices[0];
+        for(int i = 1; i < len; ++ i){
+            dp[i] = prices[i] - mi;
+            mi = min(mi, prices[i]);
+        }
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
+
+
 ## [环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
 ```C++
