@@ -693,3 +693,35 @@ public:
 //另外也可以使用哈希表，存储一条链表的节点，另一个取节点进行匹配
 ```
 
+## [岛屿数量](https://leetcode.cn/problems/number-of-islands/)
+
+```C++
+//就，dfs
+class Solution {
+public:
+    void dfs(vector<vector<char>>& grid, int i, int j, int row, int column){
+        if(i < 0 || i >= row || j < 0 || j >= column) return ;
+        if(grid[i][j] == '0') return ;
+        grid[i][j] = '0';
+        dfs(grid, i + 1, j, row, column);
+        dfs(grid, i - 1, j, row, column);
+        dfs(grid, i, j + 1, row, column);
+        dfs(grid, i, j - 1, row, column); 
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int result = 0;
+        int row = grid.size();
+        int column = grid[0].size();
+        for(int i = 0; i < row; ++ i){
+            for(int j = 0; j < column; ++ j){
+                if(grid[i][j] == '1'){
+                    dfs(grid, i, j, row, column);
+                    result ++;
+                }
+            }
+        }
+        return result;
+    }
+};
+```
+
