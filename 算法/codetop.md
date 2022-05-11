@@ -786,3 +786,31 @@ public:
 };//for循环，其实差不多
 ```
 
+## [最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+
+```C++
+//二维dp
+//
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int len = s.size();
+        vector<vector<int>> dp(len, vector<int>(len, 0));
+        int left = 0;
+        int length = 1;
+        for(int i = 0; i < len; ++ i) dp[i][i] = 1;
+        for(int i = len - 2; i >= 0; -- i){//倒着遍历
+            for(int j = i + 1; j < len; ++ j){
+                dp[i][j] = (s[i] == s[j] && dp[i + 1][j - 1] == 1) ? 1 : 0;
+                if(s[i] == s[j] && i == j - 1) dp[i][j] = 1;//会不会出现紧挨着的两个相同的情况
+                if(dp[i][j] == 1 && j - i + 1 > length){
+                    length = j - i + 1;
+                    left = i;
+                } 
+            }
+        }
+        return s.substr(left, length);
+    }
+};
+```
+
