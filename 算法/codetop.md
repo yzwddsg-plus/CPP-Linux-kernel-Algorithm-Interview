@@ -814,3 +814,43 @@ public:
 };
 ```
 
+## [全排列](https://leetcode.cn/problems/permutations/submissions/)
+
+```C++
+//dfs
+class Solution {
+public:
+    //判断是不是已经全部遍历过了
+    bool check(vector<int>& flag){
+        for(auto i : flag){
+            if(i == 0) return false;
+        }
+        return true;
+    }
+    void dfs(vector<int>& nums, vector<int>& flag, vector<vector<int>>& result, int len, vector<int>& tmp){
+        //如果已经遍历过了，加入结果列表中并返回
+        if(check(flag)){
+            result.push_back(tmp);
+            return ;
+        }
+        for(int i = 0; i < len; ++ i){
+            if(flag[i] == 0){
+                flag[i] = 1;
+                tmp.push_back(nums[i]);
+                dfs(nums, flag, result, len, tmp);
+                tmp.pop_back();
+                flag[i] = 0;
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int len = nums.size();
+        vector<int> flag(len, 0);
+        vector<vector<int>> result;
+        vector<int> tmp;
+        dfs(nums, flag, result, len, tmp);
+        return result;
+    }
+};
+```
+
